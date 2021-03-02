@@ -32,6 +32,13 @@ axios.interceptors.response.use(
             localStorage.setItem("authorization", sessionid)
             axios.defaults.headers.post['authorization'] = sessionid
         }
+        const LOGIN_URL = '/core/loginController/login'
+        let url = response.config.url
+        // 如果是登录请求，那么就存一下JWT TOKEN
+        if(url === LOGIN_URL){
+            localStorage.setItem("token", response.data.token)
+            axios.defaults.headers.post['token'] = response.data.token
+        }
         return response
     },
     (error) => {

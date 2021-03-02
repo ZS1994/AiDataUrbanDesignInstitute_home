@@ -3,10 +3,10 @@
     <el-row>
       <el-form ref="form" :model="editForm" label-width="80px">
         <el-form-item label="账号">
-          <el-input v-model="editForm.username"></el-input>
+          <el-input v-model="editForm.userNumber"></el-input>
         </el-form-item>
         <el-form-item label="密码">
-          <el-input v-model="editForm.password"></el-input>
+          <el-input v-model="editForm.userPassword"></el-input>
         </el-form-item>
         <el-button type="primary" @click="login">登录</el-button>
         <el-button type="primary" @click="logout">登出</el-button>
@@ -29,8 +29,8 @@ export default {
   data () {
     return {
       editFormDefault: {
-        username: '13537349601',
-        password: ''
+        userNumber: '13537349601',
+        userPassword: ''
       },
       editForm: Object.assign({}, this.editFormDefault)
     }
@@ -40,9 +40,13 @@ export default {
       this.$axiosPost(this.$AiDataApi.core.auth.login,
         this.editForm,
         (response) => {
+            let status = 'error'
+            if(response.data && response.data.status === 'success'){
+                status = 'success'
+            }
           this.$message({
             message: response.data.message,
-            type: 'success'
+            type: status
           })
         }
       )

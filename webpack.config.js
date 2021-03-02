@@ -57,11 +57,11 @@ module.exports = (options = {}) => ({
     },
     devServer: {
         host: '127.0.0.1',
-        port: 8010,
+        port: 8110,
         proxy: {
             '/api': {
                 // 你请求的第三方接口
-                target: 'http://127.0.0.1:8080/aidata',
+                target: 'http://127.0.0.1:8180/aidata',
                 // 在本地会创建一个虚拟服务端，然后发送请求的数据，并同时接收请求的数据，这样服务端和服务端进行数据的交互就不会有跨域问题
                 changeOrigin: true,
                 // 路径重写
